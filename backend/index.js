@@ -1,25 +1,19 @@
 const config = require('./utils/config')
+const Issue = require('./models/issue')
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require("cors")
 
 
 const app = express()
+app.use(cors())
+app.use(express.json())
 
 mongoose.set('strictQuery',false)
 mongoose.connect(config.MONGODB_URI, { family: 4 })
     .then(() => {
         console.log('connected to mongoDB')
     })
-
-const issueSchema = new mongoose.Schema({
-    title: String,
-    desc: String,
-    status: Number
-})
-
-const Issue = mongoose.model('Issue', issueSchema)
-
-app.use(express.json())
 
 app.get("/", (req, res) => {
     res.send("Hello world!")
@@ -33,7 +27,14 @@ app.get("/api/issues", (req, res) => {
 
 app.post("/api/issues", (req, res) => {
     const body = req.body
+    
+    // if(!body.content) {
+    //     return res.status(400).json({
+    //         error: 'content missing'
+    //     })
+    // }
 
+    //issue could be here. i think the body is not being processed correctly?
     const issue = new Issue({
         title: body.title,
         desc: body.desc,

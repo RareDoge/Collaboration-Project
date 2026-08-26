@@ -20,14 +20,22 @@ const App = (props) => {
     }
 
     console.log(issueObject)
+    const request = axios.post('http://localhost:3001/api/issues', issueObject)
+    request.then(result => {
+      setIssues(issues.concat(result.data))
+      console.log(result.data)
+    }).catch(error => {
+    // 2. Always handle errors to prevent silent crashes
+    console.error("Error creating issue:", error)
+    alert("Failed to create issue. Please try again.")
+    })
     setNewIssue({
       title: '',
       desc: '',
       status: '',
     })
 
-    setIssues(issues.concat(issueObject))
-    console.log(issues)
+    console.log(issues.map(issue => issue.data))
 
   }
 
