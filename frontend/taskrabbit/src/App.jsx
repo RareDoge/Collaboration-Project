@@ -1,14 +1,23 @@
 import { useState, useEffect } from 'react'
 import axios from "axios"
+import issueService from './services/issues'
+import Issue from './components/Issue'
 
 const App = (props) => {
-  const [count, setCount] = useState(0)
   const [issues, setIssues] = useState([])
   const [newIssue, setNewIssue] = useState({
     title: '',
     desc: '',
     status: '',
   })
+
+  useEffect(() => {
+      const loadIssues = initialIssues => {
+        setIssues(initialIssues)
+      }
+      issueService.getAll()
+        .then(loadIssues)
+  }, [])
 
   const addIssue = (event) => {
     event.preventDefault()
@@ -19,24 +28,19 @@ const App = (props) => {
       status: newIssue.status
     }
 
-    console.log(issueObject)
-    const request = axios.post('http://localhost:3001/api/issues', issueObject)
-    request.then(result => {
-      setIssues(issues.concat(result.data))
-      console.log(result.data)
-    }).catch(error => {
-    // 2. Always handle errors to prevent silent crashes
-    console.error("Error creating issue:", error)
-    alert("Failed to create issue. Please try again.")
-    })
+    axios.post('http://localhost:3001/api/issues', issueObject)
+      .then(result => {
+        setIssues(issues.concat(result.data))
+      }).catch(error => {
+        console.error("Error creating issue:", error)
+        alert("Failed to create issue. Please try again.")
+      })
+
     setNewIssue({
       title: '',
       desc: '',
       status: '',
     })
-
-    console.log(issues.map(issue => issue.data))
-
   }
 
   const handleIssueChange = (event) => {
@@ -45,9 +49,8 @@ const App = (props) => {
       ...newIssue,
       [name]: value
     })
-
   }
-
+  console.log(issues)
   return (
     <div>
       <form onSubmit={addIssue}>
@@ -61,6 +64,11 @@ const App = (props) => {
         Status: <input name="status" value={newIssue.status} onChange={handleIssueChange}/>
         <button type="submit">Submit Issue</button>
       </form>
+      <ul>
+        {issues.map(issue => (
+          <Issue key={issue.id} issue={issue}/>
+        ))}
+      </ul>
     </div>
   )
 }

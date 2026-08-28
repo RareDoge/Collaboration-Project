@@ -25,25 +25,23 @@ app.get("/api/issues", (req, res) => {
     })
 })
 
-app.post("/api/issues", (req, res) => {
+app.post("/api/issues", async (req, res) => {
     const body = req.body
-    
-    // if(!body.content) {
-    //     return res.status(400).json({
-    //         error: 'content missing'
-    //     })
-    // }
+    if(!body.title) {
+        return res.status(400).json({
+            error: 'content missing'
+        })
+    }
 
-    //issue could be here. i think the body is not being processed correctly?
     const issue = new Issue({
         title: body.title,
         desc: body.desc,
         status: body.status
     })
 
-    issue.save().then(savedIssue => {
-        console.log('Issue saved to DB')
-    })
+    const savedIssue = await issue.save()
+
+    res.status(201).json(savedIssue)
 })
 
 app.listen(config.PORT, () => {
