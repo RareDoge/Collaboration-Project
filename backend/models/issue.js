@@ -1,17 +1,18 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const issueSchema = new mongoose.Schema({
-    title: String,
-    desc: String,
-    status: String
-})
+  title: String,
+  desc: String,
+  status: String,
+  priority: String,
+});
 
-issueSchema.set('toJSON', {
-    transform: (document, returnedObject) => {
-        returnedObject.id = returnedObject._id.toString()
-        delete returnedObject._id
-        delete returnedObject.__v
-    }
-})
+issueSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
 
-module.exports = mongoose.model('Issue', issueSchema)
+module.exports = mongoose.model("Issue", issueSchema);
