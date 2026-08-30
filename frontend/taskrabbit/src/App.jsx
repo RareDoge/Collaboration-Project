@@ -4,9 +4,12 @@ import issueService from "./services/issues"
 import Issue from "./components/Issue"
 import StatusOptions from "./components/StatusOption"
 import CreateTask from "./components/CreateTask"
+import Column from "./components/Column"
+import NewTask from "./components/NewTask"
 
 const App = (props) => {
   const [issues, setIssues] = useState([])
+  const [newTask, setNewTask] = useState(false)
   const [newIssue, setNewIssue] = useState({
     title: "",
     desc: "",
@@ -59,43 +62,32 @@ const App = (props) => {
 
   const issueToDo = issues.filter(issue => issue.status == "To Do")
   const issueInProgress = issues.filter(issue => issue.status == "In Progress")
+  const issueInReview = issues.filter(issue => issue.status == "In Review")
   const issueDone = issues.filter(issue => issue.status == "Done")
 
   return (
 
-    <div>
+    <div className="wrapper">
       <div>
-      <h1>TASKS</h1>
-        <CreateTask
+      <h1 className="title-head">TASKS</h1>
+        {/* <CreateTask
+          addIssue={addIssue}
+          newIssue={newIssue}
+          handleIssueChange={handleIssueChange}
+        /> */}
+        <NewTask 
+          trigger={newTask}
+          setNewTask={setNewTask}
           addIssue={addIssue}
           newIssue={newIssue}
           handleIssueChange={handleIssueChange}
         />
       </div>
-
-      {/* List all issues
-       <ul>
-        {issues.map((issue) => (<Issue key={issue.id} issue={issue} />))}
-      </ul> */}
       <div className="TaskLists">
-        <div className="column">
-          <h3 className="status-label">To Do</h3>
-          <ul>
-            {issueToDo.map((issue) => (<Issue key={issue.id} issue={issue} />))}
-        </ul>
-        </div>
-        <div className="column">
-          <h3 className="status-label">In Progress</h3>
-          <ul>
-            {issueInProgress.map((issue) => (<Issue key={issue.id} issue={issue} />))}
-          </ul>
-        </div>
-        <div className="column">
-          <h3 className="status-label">Done</h3>
-          <ul>
-            {issueDone.map((issue) => (<Issue key={issue.id} issue={issue} />))}
-          </ul>
-        </div>
+        <Column label={"To Do"} issueList={issueToDo} setNewTask={setNewTask} />
+        <Column label={"In Progress"} issueList={issueInProgress} setNewTask={setNewTask} />
+        <Column label={"In Review"} issueList={issueInReview} setNewTask={setNewTask}/>
+        <Column label={"Done"} issueList={issueDone} setNewTask={setNewTask}/>
       </div>
     </div>
   )
