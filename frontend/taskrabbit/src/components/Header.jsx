@@ -4,7 +4,7 @@ const Header = () => {
         backgroundColor : "rgba(5, 16, 26, 0.8)",
         height: "100%",
         display: "flex",
-        color: "white"
+        color: "white",
     }
 
     const textCSS = {

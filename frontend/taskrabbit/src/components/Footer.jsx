@@ -1,15 +1,14 @@
 const Footer = () => {
 
     const footerStyle = {
-        marginTop: "200px",
+        marginTop: "10px",
         backgroundColor: "rgb(2, 57, 113)",
+        minHeight: "100px",
         width: "100%",
-        position: "absolute",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         color: "white",
-        left: "0",
     }
 
     return (

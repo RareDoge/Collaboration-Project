@@ -1,4 +1,5 @@
 import StatusOptions from "./StatusOption"
+import Priority from "./Priority"
 const CreateTask = ({addIssue, newIssue, handleIssueChange}) => {
     return(
       <div className="new-task-form">
@@ -28,11 +29,12 @@ const CreateTask = ({addIssue, newIssue, handleIssueChange}) => {
             </div>
             <div className="test">
               <label htmlFor="priority">Priority: </label>
-              <input
+              {/* <input
                 name="priority"
                 value={newIssue.priority}
                 onChange={handleIssueChange}
-              />
+              /> */}
+              <Priority priority={newIssue.priority} handleIssueChange={handleIssueChange}/>
             </div>
             <button className="submit-task" type="submit">Submit Issue</button>
           </form>

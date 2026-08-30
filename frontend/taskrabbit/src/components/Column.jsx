@@ -1,6 +1,6 @@
 import Issue from "./Issue"
 
-const Column = ({label, issueList, setNewTask}) => {
+const Column = ({label, issueList, setNewTask, deleteService}) => {
   
     return (
         <div className="column">
@@ -9,7 +9,7 @@ const Column = ({label, issueList, setNewTask}) => {
             <button onClick={() => setNewTask(true)}>+</button>
           </div>
           <ul>
-            {issueList.map((issue) => (<Issue key={issue.id} issue={issue} />))}
+            {issueList.map((issue) => (<Issue key={issue.id} issue={issue} deleteService={deleteService} />))}
           </ul>
         </div>
     )

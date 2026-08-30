@@ -8,8 +8,9 @@ const StatusOptions = ({status, handleIssueChange}) => {
         className="status"
         value={status}
         onChange={handleIssueChange}
+        required
       >
-        <option value="select">Select One...</option>
+        <option value="select" selected hidden>Select One...</option>
         <option value="To Do">To Do</option>
         <option value="In Progress">In Progress</option>
         <option value="In Review">In Review</option>

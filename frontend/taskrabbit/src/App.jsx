@@ -36,10 +36,9 @@ const App = (props) => {
       priority: newIssue.priority,
     };
 
-    axios
-      .post("http://localhost:3001/api/issues", issueObject)
+    issueService.create(issueObject)
       .then((result) => {
-        setIssues(issues.concat(result.data))
+        setIssues(issues.concat(result))
       })
       .catch((error) => {
         console.error("Error creating issue:", error)
@@ -64,6 +63,14 @@ const App = (props) => {
     })
   }
 
+  const deleteService = (deleteIssue) => {
+    issueService.deleteIssue(deleteIssue.id)
+
+    const afterDelete = issues.filter(issues => issues.id != deleteIssue.id)
+
+    setIssues(afterDelete)
+  }
+
   const issueToDo = issues.filter(issue => issue.status == "To Do")
   const issueInProgress = issues.filter(issue => issue.status == "In Progress")
   const issueInReview = issues.filter(issue => issue.status == "In Review")
@@ -72,27 +79,27 @@ const App = (props) => {
   return (
     <div className="wrapper">
       <Header />
-      <div>
-      <h1 className="title-head">TASKS</h1>
-        {/* <CreateTask
-          addIssue={addIssue}
-          newIssue={newIssue}
-          handleIssueChange={handleIssueChange}
-        /> */}
-        <NewTask 
-          trigger={newTask}
-          setNewTask={setNewTask}
-          addIssue={addIssue}
-          newIssue={newIssue}
-          handleIssueChange={handleIssueChange}
-        />
-      </div>
-      <div className="TaskLists">
-        <Column label={"To Do"} issueList={issueToDo} setNewTask={setNewTask} />
-        <Column label={"In Progress"} issueList={issueInProgress} setNewTask={setNewTask} />
-        <Column label={"In Review"} issueList={issueInReview} setNewTask={setNewTask}/>
-        <Column label={"Done"} issueList={issueDone} setNewTask={setNewTask}/>
-      </div>
+      <main>
+        <div>
+        <h1 className="title-head">TASKS</h1>
+          <NewTask 
+            trigger={newTask}
+            setNewTask={setNewTask}
+            addIssue={addIssue}
+            newIssue={newIssue}
+            handleIssueChange={handleIssueChange}
+          />
+        </div>
+        <div className="TaskLists">
+          <Column label={"To Do"} issueList={issueToDo} setNewTask={setNewTask} deleteService={deleteService}/>
+          <Column label={"In Progress"} issueList={issueInProgress} setNewTask={setNewTask} deleteService={deleteService}/>
+          <Column label={"In Review"} issueList={issueInReview} setNewTask={setNewTask} deleteService={deleteService}/>
+          <Column label={"Done"} issueList={issueDone} setNewTask={setNewTask} deleteService={deleteService}/>
+        </div>
+        <div className="deleteTest">
+
+        </div>
+      </main>
       <Footer/>
     </div>
   )

@@ -23,6 +23,19 @@ app.get("/api/issues", (req, res) => {
   });
 });
 
+app.get("/api/issues/:id", async (req, res) => {
+  const id = req.params.id
+  const issue = await Issue.findById(id)
+
+  if(issue)
+  {
+    res.json(issue)
+  } else {
+    res.status(404).end()
+  }
+
+})
+
 app.post("/api/issues", async (req, res) => {
   const body = req.body;
   if (!body.title) {
@@ -42,6 +55,15 @@ app.post("/api/issues", async (req, res) => {
 
   res.status(201).json(savedIssue);
 });
+
+app.delete("/api/issues/:id", async (req, res) => {
+  const id = req.params.id
+
+  await Issue.findByIdAndDelete(id)
+  res.status(204).end()
+  console.log("Successfully Deleted!")
+
+})
 
 app.listen(config.PORT, () => {
   console.log(`listening on port ${config.PORT}`);
