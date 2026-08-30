@@ -1,8 +1,10 @@
 .issue-box {
   border: 2px solid black;
-  margin: 10px;
-  min-width: 200px;
-  width: 300px;
+  border-radius: 10px;
+  width: 350px;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 p {
@@ -15,10 +17,6 @@ ul {
   flex-wrap: wrap;
   gap: 15px;
 }
-/* 
-form {
-  margin: 0 auto;
-} */
 
 input {
   display: flex;
@@ -26,4 +24,23 @@ input {
 
 .status {
   display: flex;
+}
+
+.column{
+    background-color: #e0e0e0;
+    width: 400px;
+    border:5px solid;
+}
+
+.TaskLists {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 300px;
+    gap: 20px ;
+    justify-content: space-evenly; /* Spaces boxes out perfectly */
+
+}
+
+.status-label {
+    margin-left: 50px;
 }

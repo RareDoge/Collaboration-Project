@@ -6,7 +6,7 @@ const Issue = ({ issue }) => {
       <p>{issue.status}</p>
       <p>{issue.priority}</p>
     </div>
-  );
-};
+  )
+}
 
-export default Issue;
+export default Issue

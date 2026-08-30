@@ -3,6 +3,7 @@ import axios from "axios"
 import issueService from "./services/issues"
 import Issue from "./components/Issue"
 import StatusOptions from "./components/StatusOption"
+import CreateTask from "./components/CreateTask"
 
 const App = (props) => {
   const [issues, setIssues] = useState([])
@@ -55,32 +56,47 @@ const App = (props) => {
       [name]: value,
     })
   }
-  
+
+  const issueToDo = issues.filter(issue => issue.status == "To Do")
+  const issueInProgress = issues.filter(issue => issue.status == "In Progress")
+  const issueDone = issues.filter(issue => issue.status == "Done")
+
   return (
+
     <div>
-      <form onSubmit={addIssue}>
-        <p>Create a New Issue:</p>
-        <label htmlFor="title">Title: </label>
-        <input
-          name="title"
-          value={newIssue.title}
-          onChange={handleIssueChange}
+      <div>
+      <h1>TASKS</h1>
+        <CreateTask
+          addIssue={addIssue}
+          newIssue={newIssue}
+          handleIssueChange={handleIssueChange}
         />
-        <label htmlFor="desc">Description: </label>
-        <input name="desc" value={newIssue.desc} onChange={handleIssueChange} />
-        <label htmlFor="status">Status: </label>
-        <StatusOptions status={newIssue.status} handleIssueChange={handleIssueChange} />
-        <label htmlFor="priority">Priority: </label>
-        <input
-          name="priority"
-          value={newIssue.priority}
-          onChange={handleIssueChange}
-        />
-        <button type="submit">Submit Issue</button>
-      </form>
-      <ul>
+      </div>
+
+      {/* List all issues
+       <ul>
         {issues.map((issue) => (<Issue key={issue.id} issue={issue} />))}
-      </ul>
+      </ul> */}
+      <div className="TaskLists">
+        <div className="column">
+          <h3 className="status-label">To Do</h3>
+          <ul>
+            {issueToDo.map((issue) => (<Issue key={issue.id} issue={issue} />))}
+        </ul>
+        </div>
+        <div className="column">
+          <h3 className="status-label">In Progress</h3>
+          <ul>
+            {issueInProgress.map((issue) => (<Issue key={issue.id} issue={issue} />))}
+          </ul>
+        </div>
+        <div className="column">
+          <h3 className="status-label">Done</h3>
+          <ul>
+            {issueDone.map((issue) => (<Issue key={issue.id} issue={issue} />))}
+          </ul>
+        </div>
+      </div>
     </div>
   )
 }
