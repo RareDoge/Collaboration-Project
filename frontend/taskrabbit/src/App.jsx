@@ -6,6 +6,8 @@ import StatusOptions from "./components/StatusOption"
 import CreateTask from "./components/CreateTask"
 import Column from "./components/Column"
 import NewTask from "./components/NewTask"
+import Footer from "./components/Footer"
+import Header from "./components/Header"
 
 const App = (props) => {
   const [issues, setIssues] = useState([])
@@ -50,6 +52,8 @@ const App = (props) => {
       status: "",
       priority: "",
     })
+
+    setNewTask(false)
   }
 
   const handleIssueChange = (event) => {
@@ -66,8 +70,8 @@ const App = (props) => {
   const issueDone = issues.filter(issue => issue.status == "Done")
 
   return (
-
     <div className="wrapper">
+      <Header />
       <div>
       <h1 className="title-head">TASKS</h1>
         {/* <CreateTask
@@ -89,6 +93,7 @@ const App = (props) => {
         <Column label={"In Review"} issueList={issueInReview} setNewTask={setNewTask}/>
         <Column label={"Done"} issueList={issueDone} setNewTask={setNewTask}/>
       </div>
+      <Footer/>
     </div>
   )
 }

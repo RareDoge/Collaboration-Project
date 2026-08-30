@@ -12,7 +12,8 @@ const NewTask = (props) => {
 
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor: "rgb(80, 80, 80, 0.7)"
     }
 
     const popUpInner = {
@@ -21,8 +22,9 @@ const NewTask = (props) => {
         height: "500px",
         width: "350px",
         maxWidth: "640px",
-        backgroundColor: "rgba(251, 14, 14, 0.75)",
-        borderRadius: "10px"
+        backgroundColor: "rgb(255, 253, 253)",
+        borderRadius: "10px",
+        boxShadow: "0 4px 12px rgb(150, 145, 145)"
     }
 
     const buttonStyle = { 
