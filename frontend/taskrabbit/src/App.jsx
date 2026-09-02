@@ -4,6 +4,7 @@ import Header from './components/Header'
 import MainPage from './pages/MainPage'
 import DashBoard from './pages/DashBoard'
 import SignUp from './pages/SignUp'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = (props) => {
   return (
