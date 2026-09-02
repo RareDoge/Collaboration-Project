@@ -4,13 +4,14 @@ const StatusOptions = ({status, handleIssueChange}) => {
       <label htmlFor="status">Status:</label>
       
       <select
+        id="status"
         name="status"
         className="status"
-        value={status}
         onChange={handleIssueChange}
+        defaultValue={"Select One..."}
         required
       >
-        <option value="select" selected hidden>Select One...</option>
+        <option value="select" hidden>Select One...</option>
         <option value="To Do">To Do</option>
         <option value="In Progress">In Progress</option>
         <option value="In Review">In Review</option>

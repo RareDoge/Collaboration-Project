@@ -8,6 +8,7 @@ const CreateTask = ({addIssue, newIssue, handleIssueChange}) => {
             <div className="test">
               <label htmlFor="title">Title: </label>
               <input
+                id="title"
                 name="title"
                 value={newIssue.title}
                 onChange={handleIssueChange}
@@ -17,6 +18,7 @@ const CreateTask = ({addIssue, newIssue, handleIssueChange}) => {
             <div className="test">
               <label htmlFor="desc">Description: </label>
               <input 
+                id="desc"
                 name="desc"
                 value={newIssue.desc}
                 onChange={handleIssueChange}

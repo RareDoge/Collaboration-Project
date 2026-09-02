@@ -1,11 +1,13 @@
 const Priority = ({priority, handleIssueChange}) => {
     return(
         <select
+        id="priority"
         name="priority"
-        value={priority}
         onChange={handleIssueChange}
-        required>
-            <option value="" disabled selected hidden>Select Priority Level...</option>
+        defaultValue={"Priority Level"}
+        required
+        >
+            <option value="" defaultValue={"test"} hidden>Select Priority Level...</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>

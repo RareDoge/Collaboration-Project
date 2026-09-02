@@ -37,7 +37,7 @@ const NewTask = (props) => {
     return(props.trigger) ? (
         <div className="popup" style={popUp}>
             <div style={popUpInner}>
-                <button style={buttonStyle} onClick={() => props.setNewTask(false)}>Close</button>
+                <button className={"close-task"}  style={buttonStyle} onClick={() => props.setNewTask(false)}>Close</button>
                     <CreateTask
                     addIssue={props.addIssue}
                     newIssue={props.newIssue}

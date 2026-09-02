@@ -62,7 +62,11 @@ app.delete("/api/issues/:id", async (req, res) => {
   await Issue.findByIdAndDelete(id)
   res.status(204).end()
   console.log("Successfully Deleted!")
+})
 
+
+app.post('/login', async (req, res) => {
+  res.status(200)
 })
 
 app.listen(config.PORT, () => {
