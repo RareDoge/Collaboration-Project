@@ -7,6 +7,7 @@ const issueSchema = new mongoose.Schema({
   priority: String,
 });
 
+
 issueSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();

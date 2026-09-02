@@ -27,7 +27,7 @@ const Header = () => {
         display: "flex",
         alignItems: "center",
         fontSize: "20px",
-        border: "2px solid black",
+        // border: "2px solid black",
         borderRadius: "20px",
         padding: "10px"
     }
