@@ -3,10 +3,16 @@ const Issue = require("./models/issue");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookie_parser = require('cookie-parser')
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true,
+}));
+
 app.use(express.json());
+app.use(cookie_parser())
 
 mongoose.set("strictQuery", false);
 mongoose.connect(config.MONGODB_URI, { family: 4 }).then(() => {
