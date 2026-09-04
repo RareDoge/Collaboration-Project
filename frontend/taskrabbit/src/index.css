@@ -90,6 +90,7 @@ select {
     border: 1px solid #ccc;
     font-family: montserrat;
     cursor: pointer;
+    width: 100%;
 }
 
 
@@ -162,7 +163,7 @@ ul {
 }
 
 .header button {
-    font-size: 20px ;
+    font-size: 20px;
     font-weight: 500;
     text-align: right;
     margin-left: auto;
@@ -180,7 +181,7 @@ ul {
 }
 
 .title-head {
-    margin-top:20;
+    margin-top:20px;
     padding-left: 50px;
 }
 

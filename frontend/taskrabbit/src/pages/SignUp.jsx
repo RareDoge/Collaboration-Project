@@ -1,4 +1,12 @@
+import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
 const SignUp = () => {
+    const [userData, setUserData] = useState({username: '', email: '', password: ''})
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+
     const pageWrapper = {
         display: "flex",
         alignItems: "center",
@@ -8,7 +16,6 @@ const SignUp = () => {
 
     const formLayout = {
         gap: "10px",
-        height: "40vh",
         alignContent: "center",
         textAlign: "center",
         display: "flex",
@@ -36,32 +43,57 @@ const SignUp = () => {
         padding: "10px",
         textDecoration: "none",
         fontSize: "15px",
+    }
+
+    const handleFormChange = (event) => {
+        setUserData({...userData, [event.target.name]: event.target.value})
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        setLoading(true)
+
+         try {
+            axios.post('http://localhost:3001/api/register',
+                userData,
+            {withCredentials: true})
+            console.log('successfully created user. re-routing to tasks')
+            navigate('/TasksPage')
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+    }
 
     }
+
 
     return (
         <div className='login-wrapper' style={pageWrapper}>
             <h1>Sign Up</h1>
-            <form style={formLayout}>
+            <form style={formLayout} onSubmit={handleSubmit}>
                 <input 
                     name="email" 
                     type='email' 
                     placeholder='Sample@email.com'
                     style={inputStyle}
+                    onChange={handleFormChange}
                 ></input>
                 <input 
                     name="username" 
                     type='usernmae' 
                     placeholder='Username'
                     style={inputStyle}
+                    onChange={handleFormChange}
                 ></input>
                 <input 
                     style={inputStyle} 
                     name="password" 
                     type='password' 
                     placeholder='Password'
+                    onChange={handleFormChange}
                 ></input>
-                <button style={submitStyle}>Register</button>
+                <button style={submitStyle}>{loading ? "Loading..." : "Register"}</button>
             </form>
         </div>
 

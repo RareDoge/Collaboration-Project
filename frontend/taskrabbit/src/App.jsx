@@ -5,6 +5,7 @@ import MainPage from './pages/MainPage'
 import DashBoard from './pages/DashBoard'
 import SignUp from './pages/SignUp'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ProtectedRoute from './components/ProtectedRoute'
 
 const App = (props) => {
   return (
@@ -12,7 +13,11 @@ const App = (props) => {
       <Header/>
         <Routes>
           <Route path='/' element={<MainPage/>}/>
-          <Route path='/TasksPage' element={<DashBoard/>}></Route>
+          <Route path='/TasksPage' element={
+            <ProtectedRoute>
+              <DashBoard/>
+            </ProtectedRoute>
+            }/>
           <Route path='/login' element={<LoginPage/>}></Route>
           <Route path='/SignUp' element={<SignUp/>}></Route>
         </Routes>
